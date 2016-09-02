@@ -1,5 +1,5 @@
 <?php
 $I = new AcceptanceTester($scenario);
-$I->wantTo('Fixhub.org?');
+$I->wantTo('Fixhub');
 $I->amOnPage('/');
-$I->see('fixhub?');
+$I->see('Fixhub);

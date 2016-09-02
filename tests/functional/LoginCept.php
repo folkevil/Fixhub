@@ -5,14 +5,14 @@ $I->wantTo('login as a user');
 $I->haveRecord('users', [
     'name'       => 'Joe Doe',
     'email'      => 'joe@doe.com',
-    'password'   => bcrypt('123'),
+    'password'   => bcrypt('password'),
     'created_at' => new DateTime(),
     'updated_at' => new DateTime(),
 ]);
 
 $I->amOnPage('/auth/login');
-$I->fillField('name', 'Joe Doe');
-$I->fillField('password', '123');
+$I->fillField('login', 'Joe Doe');
+$I->fillField('password', 'password');
 $I->click('button[type=submit]');
 
 $I->amOnPage('/');
