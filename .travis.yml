@@ -6,9 +6,6 @@ php:
 services:
   - redis-server
 
-addons:
-  postgresql: "9.3"
-
 before_install:
   - if [[ $TRAVIS_PHP_VERSION != 7.1 ]] ; then phpenv config-rm xdebug.ini; fi
 
@@ -18,6 +15,8 @@ install:
 before_script:
     - cp .env.example .env
     - sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=sqlite/g' .env
+    - sed -i 's/DB_DATABASE=fixhub/DB_DATABASE=/g' .env
+    - touch database/database.sqlite
     - php artisan key:generate
     - php artisan migrate --seed --env="testing"
     - php vendor/bin/codecept build
