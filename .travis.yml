@@ -8,11 +8,14 @@ php:
 sudo: false
 
 before_install:
-  - cp .env.example .env
   - if [[ $TRAVIS_PHP_VERSION != 7.1 ]] ; then phpenv config-rm xdebug.ini; fi
-  - php vendor/bin/codecept build
 
 install: travis_retry composer install --no-interaction --no-scripts --prefer-source --no-suggest
+
+before_script:
+    - cp .env.example .env
+    - php artisan migrate --seed --env="testing"
+    - php vendor/bin/codecept build
 
 script: 
   - vendor/bin/phpcs -p --standard=PSR2 --ignore="app/Helpers/Helpers.php,app/Presenters" app/
