@@ -7,13 +7,20 @@ php:
 
 sudo: false
 
+services:
+  - postgresql
+
+addons:
+  postgresql: "9.3"
+
 before_install:
   - if [[ $TRAVIS_PHP_VERSION != 7.1 ]] ; then phpenv config-rm xdebug.ini; fi
 
 install: travis_retry composer install --no-interaction --no-scripts --prefer-source --no-suggest
 
 before_script:
-    - cp .env.example .env
+    - psql -c 'create database fixhub_test;' -U postgres
+    - cp .env.testing .env
     - php artisan migrate --seed --env="testing"
     - php vendor/bin/codecept build
 
