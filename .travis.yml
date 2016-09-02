@@ -13,13 +13,22 @@ addons:
 before_install:
   - if [[ $TRAVIS_PHP_VERSION != 7.1 ]] ; then phpenv config-rm xdebug.ini; fi
 
-install: travis_retry composer install --no-interaction --no-scripts --prefer-source --no-suggest
+install:
+  - ravis_retrycomposer install --no-interaction --no-scripts --prefer-source --no-suggest
+  - npm -g install npm@next
 
 before_script:
+    - make install-gulp
     - psql -c 'create database fixhub_test;' -U postgres
     - cp .env.testing .env
     - php artisan migrate --seed --env="testing"
     - php vendor/bin/codecept build
+    - make file-permission
+    - make install-assets
+    - make assets-production
+    - phantomjs --webdriver=4444 2>&1 >/dev/null &
+    - sleep 5
+    - php -S 127.0.0.1:8000 -t public/ 2>&1 >/dev/null &
 
 script: 
   - vendor/bin/phpcs -p --standard=PSR2 --ignore="app/Helpers/Helpers.php,app/Presenters" app/
