@@ -11,9 +11,10 @@ class UserTest extends \Codeception\TestCase\Test
     protected $tester;
     public function testRegister()
     {
-        $email = 'johndoe@example.com';
+        $name = 'demo';
+        $email = 'demo@fixhub.org';
         $password ='password';
-        User::create(['email' => $email, 'password' => $password]);
-        $this->tester->seeRecord('users', ['email' => $email, 'password' => $password]);
+        User::create(['name' => $name, 'email' => $email, 'password' => $password]);
+        $this->tester->seeRecord('users', ['name' => $name, 'email' => $email, 'password' => $password]);
     }
 }
