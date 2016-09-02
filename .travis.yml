@@ -18,7 +18,7 @@ before_script:
     - sed -i 's/DB_DATABASE=fixhub/DB_DATABASE=/g' .env
     - touch database/database.sqlite
     - php artisan key:generate
-    - php artisan migrate --seed --env="testing"
+    - php artisan migrate
     - php vendor/bin/codecept build
     - make file-permission
     - sleep 5
