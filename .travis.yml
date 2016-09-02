@@ -10,10 +10,14 @@ sudo: false
 before_install:
   - cp .env.example .env
   - if [[ $TRAVIS_PHP_VERSION != 7.1 ]] ; then phpenv config-rm xdebug.ini; fi
+  - php vendor/bin/codecept build
 
 install: travis_retry composer install --no-interaction --no-scripts --prefer-source --no-suggest
 
 script: 
-  - php vendor/bin/phpunit --colors
   - vendor/bin/phpcs -p --standard=PSR2 --ignore="app/Helpers/Helpers.php,app/Presenters" app/
   - vendor/bin/phpdoccheck --directory=app
+  - php vendor/bin/codecept run
+
+after_script:
+  - cat $TRAVIS_BUILD_DIR/storage/logs/*.log
