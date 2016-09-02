@@ -17,7 +17,7 @@ install:
   - composer install --no-interaction --no-scripts --prefer-source --no-suggest
 
 before_script:
-    - cp .env.testing .env
+    - cp .env.example .env
     - sed -i 's/DB_CONNECTION=mysql/DB_CONNECTION=pgsql/g' .env
     - sed -i 's/DB_USERNAME=fixhub/DB_USERNAME=postgres/g' .env
     - psql -c 'create database fixhub;' -U postgres
