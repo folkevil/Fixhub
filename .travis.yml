@@ -6,6 +6,7 @@ php:
 services:
   - postgresql
   - redis-server
+  - beanstalkd
 
 addons:
   postgresql: "9.3"
@@ -17,7 +18,7 @@ install:
   - composer install --no-interaction --no-scripts --prefer-source --no-suggest
 
 before_script:
-    - psql -c 'create database fixhub_test;' -U postgres
+    - psql -c 'create database fixhub;' -U postgres
     - cp .env.testing .env
     - php artisan migrate --seed --env="testing"
     - php vendor/bin/codecept build

@@ -20,7 +20,8 @@ dependency-install:
 
 file-permission:
 	chmod -R 777 storage/
-	chmod 777 bootstrap/cache/
+	chmod -R 777 bootstrap/cache/
+	chmod -R 777 public/upload
 
 migration:
 	php artisan migrate --force
