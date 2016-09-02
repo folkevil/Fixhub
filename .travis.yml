@@ -14,7 +14,7 @@ before_install:
   - if [[ $TRAVIS_PHP_VERSION != 7.1 ]] ; then phpenv config-rm xdebug.ini; fi
 
 install:
-  - ravis_retrycomposer install --no-interaction --no-scripts --prefer-source --no-suggest
+  - ravis_retry composer install --no-interaction --no-scripts --prefer-source --no-suggest
   - npm -g install npm@next
 
 before_script:
