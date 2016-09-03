@@ -73,6 +73,9 @@
                         </li>
                     </ul>
                 </li>
+                @if($current_user->is_admin)
+                <li><a href="/admin/settings"><i class="ion ion-wrench"></i> {{ trans('settings.label') }}</a></li>
+                @endif
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="{{ $current_user->avatar_url }}" class="user-image" />
