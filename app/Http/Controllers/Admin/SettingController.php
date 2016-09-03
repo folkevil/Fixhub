@@ -36,11 +36,10 @@ class SettingController extends Controller
         $current_tab = $request->get('current_tab');
         $setting = app(Repository::class);
         try {
-            foreach($request->except($excludedParams) as $settingName => $settingValue) {
+            foreach ($request->except($excludedParams) as $settingName => $settingValue) {
                 $setting->set($settingName, $settingValue);
             }
         } catch (Exception $e) {
-
         }
         Session::flash('current_tab', $current_tab);
 
