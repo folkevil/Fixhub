@@ -16,6 +16,5 @@ return [
     'localization' => '本地化',
     'url'          => 'URL',
     'language'     => '语言',
-    'show_support' => '是否展示支持Fixhub?',
 
 ];

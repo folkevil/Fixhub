@@ -11,6 +11,10 @@
 
 return [
 
-    'label' => 'Settings',
+    'label'        => 'Settings',
+    'setup'        => 'Setup',
+    'localization' => 'Localization',
+    'url'          => 'URL',
+    'language'     => 'Language',
 
 ];
